@@ -1,0 +1,113 @@
+.background {
+    width: 687.5px;
+    height: 453.5px;
+    margin: auto;
+    background-image: url(poker-table.png);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    position: relative;
+}
+.background div {
+    position: absolute;
+    background-image: url(koloda.png);
+    width: 44px;
+    height: 65.6px;
+    background-repeat: no-repeat;
+    background-position: 0% 100%;
+}
+.one {
+    left: 43%;
+    bottom: 25%;
+}
+.two {
+    left: 50%;
+    bottom: 25%;
+}
+.three {
+    left: 43%;
+    top: 15%;
+}
+.four {
+    left: 50%;
+    top: 15%;
+}
+.five {
+    left: 33%;
+    top: 38%;
+}
+.six {
+    left: 40%;
+    top: 38%;
+}
+.seven {
+    left: 47%;
+    top: 38%;
+}
+.eight {
+    left: 54%;
+    top: 38%;
+}
+.nine {
+    left: 61%;
+    top: 38%;
+}
+.computer, .player {
+    width: 7em;
+    height: 2.5em;
+    background: grey;
+    position: absolute;
+    border-radius: 5px;
+    border: 4px groove black;
+    text-align: center;
+    line-height: 5px;
+    padding-top: 5px;
+
+}
+.computer {
+    left: 54%;
+    top: 0.5%;
+}
+.player {
+    left: 54%;
+    top: 56%;
+}
+.question {
+    position: fixed;
+    margin-left: -10em;
+    margin-top: -6em;
+    top: 30%;
+    left: 50%;
+    width: 20em;
+    height: 12em;
+    background-color: grey;
+    border-radius: 15px;
+    box-shadow: 2px -2px 5px;
+    border: 4px groove black;
+    display: block;
+}
+.question div {
+    padding-left: 5em;
+    font-size: 1.1em;
+}
+.question [type='button'] {
+    font-size: 1em;
+    background-color: darkgreen;
+    border: 2px groove black;
+    border-radius: 3px;
+    margin-top: 5px;
+}
+.play [type='button'] {
+    width: 140px;
+    height: 40px;
+    text-align: center;
+    background-color: grey;
+    border: black 4px solid;
+    font-size: 1em;
+    font-weight: bold;
+    margin:  auto;
+    display: block;
+}
+.memory {
+    display: none;
+    z-index: -1;
+}
