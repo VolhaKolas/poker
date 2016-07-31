@@ -1,3 +1,9 @@
+/*
+* @method compare an array numbers
+* @param {array} ar An Array of random Numbers
+* @return {array} ar An Array of Numbers from the largest to the smallest
+*/
+
 function compare(ar) {
     function compareNumeric(a, b) {
         if (a > b) return -1;
@@ -7,19 +13,27 @@ function compare(ar) {
     return ar;
 }
 
-
+/*
+* @method random number creature
+* @return {Number} number The one random number from 2 to 14 or 102 to 114 or 202 to 214 or 302 to 314
+**/
 function random() {
-    var a,
+    var number,
         i = 0;
     for (;; i++) {
-        a = Math.round(Math.random()*1000);
-        if (a >= 2 && a <= 14 || a >= 102 && a <= 114 || a >= 202 && a <= 214 || a >= 302 && a <= 314) {
+        number = Math.round(Math.random()*1000);
+        if (number >= 2 && number <= 14 || number >= 102 && number <= 114 || number >= 202 && number <= 214 || number >= 302 && number <= 314) {
             break;
         }
     }
-    return a;
+    return number;
 }
 
+/*
+* @method random array creature
+* @param {Number} value The quantity of poker players
+* @ return {Array} arr The array of random numbers(Each player gets 2 cards and 5 cards on the table)
+*/
 
 function array(value) {
     var number = value * 2 + 5;
@@ -51,6 +65,11 @@ function array(value) {
  couple - 1e+2
  */
 
+/*
+ * @method calculate, is it array numbers a street combination
+ * @param {Array} arr Array of random numbers
+ * @return {Number) if combination is street, return the largest of numbers * 1e+8, else return 0
+ */
 
 function street(arr) {
     var a, b, c,
@@ -59,20 +78,16 @@ function street(arr) {
     /*adding A as 1 if A, 2, 3, 4, 5 */
     for (var z = 0; z < length; z++) {
         if (arr[z] == 14) {
-            arr = arr + "," + 1;
-            arr = arr.split(",");
+            arr.push(1);
         }
         else if (arr[z] == 114) {
-            arr = arr + "," + 101;
-            arr = arr.split(",");
+            arr.push(101);
         }
         else if (arr[z] == 214) {
-            arr = arr + "," + 201;
-            arr = arr.split(",");
+            arr.push(201);
         }
         else if (arr[z] == 314) {
-            arr = arr + "," + 301;
-            arr = arr.split(",");
+            arr.push(301);
         }
     }
     length = arr.length;
@@ -153,6 +168,20 @@ function street(arr) {
     else return 0;
 }
 
+/*
+ * @method calculate, is it array numbers a flesh combination
+ * @param {Array} arr Array of random numbers
+ * @return {Number)
+  *
+ * if combination is flesh,
+ * return the number: result[0] * 1e+10 + result[1] * 1e+8 + result[2] * 1e+6 + result[3] * 1e+4 + result[4] * 1e+2,
+ * where result is array of flesh members,
+ * result[0] > result[1] > result[2] > result[3] > result[4],
+ *
+ * else if street flesh, return the largest of numbers * 1e+16
+ *
+ * else return 0
+ */
 
 function flesh(arr) {
     var zero, one, two, three,
@@ -216,15 +245,35 @@ function flesh(arr) {
 
 }
 
+/*
+ * @method calculate, is it array numbers a couple, triple, square combination
+ * @param {Array} arr Array of random numbers
+ * @return {Number) result
+ * if combination is couple, return couple number * 1e+2,
+ *
+  * else if combination is 2 couples, return the largest number * 1e+4
+  * plus the smallest(or the next after the largest, if 3 couple) * 1e+2,
+  *
+  * else if combination is triple, return triple number * 1e+6,
+  *
+  * else if combination is full house, return triple number * 1e+12
+  * plus couple(or the largest couple) * 1e+10,
+  *
+  * else if combination is square, return square number * 1e+14,
+  *
+  * else return 0.
+ */
+
 function couple(arr) {
     var count1, count2, count3,
-        a, b, c, sub,ar, result;
+        a, b, c, sub, result,
+        ar =[];
     a = b = c = sub = result = 0;
     count1 = count2 = count3 = 0;
-    ar = arr;
 
-    for (var n = 0; n < ar.length; n++) {
-        ar[n] = ar[n] % 100;
+
+    for (var n = 0; n < arr.length; n++) {
+        ar[n] = arr[n] % 100;
     }
     ar = compare(ar);
     for (var i = 1; i < ar.length; i++) {
@@ -326,46 +375,65 @@ function couple(arr) {
     return result;
 }
 
+/*
+* @method array priority
+* @param {Array} ar An Array of random numbers
+* @return {Number} result
+* determined, Array has flesh or street or square or full house or triple or 2 couples or couple combination
+*
+* return combination's priority:
+* street flash - 1e+16
+* square - 1e+14
+* full house - 1e+12
+* flesh - 1e+10
+* street - 1e+8
+* triple - 1e+6
+* 2 couples - 1e+4
+* couple - 1e+2
+* hight card - 1e+0
+*
+*/
+
 function priority(ar) {
-    var f, s, coup,
+    var coup,
         high1, high2,
         result;
     high1 = ar[0] % 100;
     high2 = ar[1] % 100;
-    f = flesh(ar);
-    s = street(ar);
-    coup = couple(ar);
-    if (f >= 1e+16) {
+    ar.flesh = flesh(ar);
+    ar.street = street(ar);
+    ar.couple = couple(ar);
+    if (ar.flesh >= 1e+16) {
         console.log("street flash");
-        result = f;
+        result = ar.flesh;
     }
-    else if (coup >= 1e+14 && coup < 1e+16) {
+    else if (ar.couple >= 1e+14 && ar.couple < 1e+16) {
         console.log("square");
-        result = coup;
+        result = ar.couple;
     }
-    else if (coup >= 1e+12 && coup < 1e+14) {
+    else if (ar.couple >= 1e+12 && ar.couple < 1e+14) {
         console.log("full house");
-        result = coup;
+        result = ar.couple;
     }
-    else if (f >= 1e+10) {
+    else if (ar.flesh >= 1e+10) {
         console.log("flesh");
-        result = f;
+        result = ar.flesh;
     }
-    else if (s >= 1e+8 && s < 1e+10) {
+    else if (ar.street >= 1e+8 && ar.street < 1e+10) {
         console.log("street");
-        result = s;
+        result = ar.street;
     }
-    else if (coup >= 1e+6 && coup < 1e+8) {
+    else if (ar.couple >= 1e+6 && ar.couple < 1e+8) {
         console.log("triple");
-        result = coup;
+        result = ar.couple;
     }
-    else if (coup >= 1e+4 && coup < 1e+6) {
+    else if (ar.couple >= 1e+4 && ar.couple < 1e+6) {
         console.log("two couples");
-        result = coup;
+        result = ar.couple;
     }
-    else if (coup >= 1e+2 && coup < 1e+4) {
+    else if (ar.couple >= 1e+2 && ar.couple < 1e+4) {
         console.log("couple");
-        result = coup;
+        result = ar.couple;
     }
 
     else {
