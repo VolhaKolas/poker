@@ -72,29 +72,32 @@ function array(value) {
  */
 
 function street(arr) {
-    var a, b, c,
-        length = arr.length;
-    a = b = c = [];
+    var a = [], b = [], c = [], ar = [],
+        length;
+    for (var ii = 0; ii < arr.length; ii++) {
+        ar[i] = arr[i];
+    }
+    length = ar.length;
     /*adding A as 1 if A, 2, 3, 4, 5 */
     for (var z = 0; z < length; z++) {
-        if (arr[z] == 14) {
-            arr.push(1);
+        if (ar[z] == 14) {
+            ar.push(1);
         }
-        else if (arr[z] == 114) {
-            arr.push(101);
+        else if (ar[z] == 114) {
+            ar.push(101);
         }
-        else if (arr[z] == 214) {
-            arr.push(201);
+        else if (ar[z] == 214) {
+            ar.push(201);
         }
-        else if (arr[z] == 314) {
-            arr.push(301);
+        else if (ar[z] == 314) {
+            ar.push(301);
         }
     }
-    length = arr.length;
+    length = ar.length;
     for (var i = 0; i < length; i++) {
         for (var n = 0; n < length; n++) {
-            if ((Math.abs(arr[i] % 100 - arr[n] % 100) == 1) && i != n) {
-                a = a + arr[i] + ", " + arr[n] + ", ";
+            if ((Math.abs(ar[i] % 100 - ar[n] % 100) == 1) && i != n) {
+                a = a + ar[i] + ", " + ar[n] + ", ";
             }
         }
     }
@@ -185,26 +188,28 @@ function street(arr) {
 
 function flesh(arr) {
     var zero, one, two, three,
-        a, b, c, d, result, s,
+        a = [], b = [], c = [], d = [], result =[], s =[], ar =[],
         length = arr.length;
     zero = one = two = three = 0;
-    a = b = c = d = result = s = [];
+    for (var ii = 0; ii < length; ii++) {
+        ar[i] = arr[i];
+    }
     for (var i = 0; i < length; i++) {
-        if (arr[i] <= 14 && arr[i] >= 2) {
+        if (ar[i] <= 14 && ar[i] >= 2) {
             zero++;
-            a = a + arr[i] + ", ";
+            a = a + ar[i] + ", ";
         }
-        else if (arr[i] <= 114 && arr[i] >= 102) {
+        else if (ar[i] <= 114 && ar[i] >= 102) {
             one++;
-            b = b + arr[i] + ", ";
+            b = b + ar[i] + ", ";
         }
-        else if (arr[i] <= 214 && arr[i] >= 202) {
+        else if (ar[i] <= 214 && ar[i] >= 202) {
             two++;
-            c = c + arr[i] + ", ";
+            c = c + ar[i] + ", ";
         }
-        else if (arr[i] <= 314 && arr[i] >= 302) {
+        else if (ar[i] <= 314 && ar[i] >= 302) {
             three++;
-            d = d + arr[i] + ", ";
+            d = d + ar[i] + ", ";
         }
     }
     if (zero >= 5) {
@@ -267,7 +272,7 @@ function flesh(arr) {
 function couple(arr) {
     var count1, count2, count3,
         a, b, c, sub, result,
-        ar =[];
+        ar = [];
     a = b = c = sub = result = 0;
     count1 = count2 = count3 = 0;
 
