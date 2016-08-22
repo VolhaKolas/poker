@@ -7,7 +7,7 @@
     background-size: 100%;
     position: relative;
 }
-.background div {
+.background .wrapper div {
     position: absolute;
     background-image: url(koloda.png);
     width: 44px;
@@ -64,12 +64,12 @@
 
 }
 .computer {
-    left: 54%;
-    top: 0.5%;
+    left: 56%;
+    top: -1%;
 }
 .player {
-    left: 54%;
-    top: 56%;
+    left: 56%;
+    top: 80%;
 }
 .question {
     position: fixed;
