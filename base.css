@@ -71,7 +71,7 @@
     left: 56%;
     top: 80%;
 }
-.question {
+.question, .result {
     position: fixed;
     margin-left: -10em;
     margin-top: -6em;
@@ -83,13 +83,25 @@
     border-radius: 15px;
     box-shadow: 2px -2px 5px;
     border: 4px groove black;
+}
+.result {
+    margin-left: 0em;
+    left: 1%;
+}
+.question {
     display: block;
 }
-.question div {
+.result {
+    display: none;
+}
+.question div{
     padding-left: 5em;
     font-size: 1.1em;
 }
-.question [type='button'] {
+.result div {
+    padding-left: 1em;
+}
+.question [type='button'], .result button {
     font-size: 1em;
     background-color: darkgreen;
     border: 2px groove black;

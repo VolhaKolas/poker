@@ -62,7 +62,7 @@ function array(value) {
  street - 1e+8
  triple - 1e+6
  2 couples - 1e+4
- couple - 1e+2
+ couple - 1e+2 (the second card  - 1e-2)
  */
 
 /*
@@ -395,14 +395,15 @@ function couple(arr) {
 * triple - 1e+6
 * 2 couples - 1e+4
 * couple - 1e+2
-* hight card - 1e+0
+* hight card - 1e+0 (the second card  - 1e-2)
 *
 */
 
 function priority(ar) {
     var coup,
         high1, high2,
-        result;
+        result,
+        text;
     high1 = ar[0] % 100;
     high2 = ar[1] % 100;
     ar.flesh = flesh(ar);
@@ -413,44 +414,53 @@ function priority(ar) {
         result = ar.flesh;
     }
     else if (ar.couple >= 1e+14 && ar.couple < 1e+16) {
-        console.log("square");
+        text = "square";
         result = ar.couple;
     }
     else if (ar.couple >= 1e+12 && ar.couple < 1e+14) {
-        console.log("full house");
+        text = "full house";
         result = ar.couple;
     }
     else if (ar.flesh >= 1e+10) {
-        console.log("flesh");
+        text = "flesh";
         result = ar.flesh;
     }
     else if (ar.street >= 1e+8 && ar.street < 1e+10) {
-        console.log("street");
+        text = "street";
         result = ar.street;
     }
     else if (ar.couple >= 1e+6 && ar.couple < 1e+8) {
-        console.log("triple");
+        text = "triple";
         result = ar.couple;
     }
     else if (ar.couple >= 1e+4 && ar.couple < 1e+6) {
-        console.log("two couples");
+        text = "two couples";
         result = ar.couple;
     }
     else if (ar.couple >= 1e+2 && ar.couple < 1e+4) {
-        console.log("couple");
+        text = "couple";
         result = ar.couple;
     }
 
     else {
-        console.log("high card");
+        text = "high card";
         if (high1 > high2) {
-            result = high1;
+            result = high1 + high2/100;
         }
         else {
-            result = high2;
+            result = high2 + high1/100;
         }
     }
-    console.log(result);
+    var show = $('.result').children();
+    var player = '';
+    if (show.length == 2) {
+        player = "Первый игрок получает комбинацию: ";
+    }
+    if (show.length == 3) {
+        player = "Второй игрок получает комбинацию: ";
+    }
+    $('.result').append("<div>" + player + " " + text + "; Приоритет комбинации: " + result + "</div>");
+
     return result;
 }
 
@@ -464,6 +474,7 @@ $('.question [type="button"]').on('click', function () {
     if ($("[type='checkbox']").is(":checked")) {
         var value = 2, arr, a, first0, first1;
         arr = array(value);
+        $('.result').empty();
         $("div.memory").html(arr.join(", "));
         a = arr.splice(0, 2);
         $(".question").css("display", "none").css("z-index", "-1");
@@ -476,6 +487,7 @@ $('.question [type="button"]').on('click', function () {
 });
 
 $('.play [type="button"]').on('click', function () {
+    $(".result").css("display", "none");
     if ($(".question").css("display") == "none") {
         $(".question").css("display", "none").css("z-index", "-10");
         var arr, a, b, main0, main1, main2, main3, main4, second0, second1;
@@ -511,6 +523,7 @@ $('.play [type="button"]').on('click', function () {
                 $(".three").css("background-position", second0);
                 $(".four").css("background-position", second1);
                 $(this).val("Играть дальше");
+                $(".result").css("display", "block");
 
                 /*calculate*/
                 length = $("[type='checkbox']").length;
@@ -535,28 +548,32 @@ $('.play [type="button"]').on('click', function () {
                 br = (b + "," + arr).split(",");
                 ap = priority(ar);
                 bp = priority(br);
-                console.log(a);
-                console.log(b);
-                console.log(arr);
+
+                var text;
                 if (ap > bp) {
                     sumPlayer = sumPlayer + rate * 2;
-                    console.log("Победил первый игрок");
+                    text = "Победил первый игрок";
                 }
                 else if (ap == bp) {
-                    console.log("Ничья");
+                    text = "Ничья";
                     sumPlayer = sumPlayer + rate;
                     sumComputer = sumComputer + rate;
                 }
                 else {
                     sumComputer = sumComputer + rate * 2;
-                    console.log("Победил второй игрок");
+                    text = "Победил второй игрок";
                 }
+                $('.result').append("<div>" + a + "<br>" + b + "<br>"+ arr + "<br>" + text + "<form><button>Ok</button></form>" + "</div>");
                 $(".computer p").text(sumComputer);
                 $(".player p").text(sumPlayer);
                 $("[type='checkbox']").attr("checked", false);
             }
         }
     }
+
+    $(".result button").on("click", function() {
+        $(".result").css("display", "none");
+    });
 });
 
 
