@@ -326,6 +326,8 @@ function couple(arr) {
         sub = b;
         b = a;
         a = sub;
+        count1 = 2;
+        count2 = 1;
         count3 = 0;
     }
     /* change position: "c" to "a"(will be made the first), "a"  to "b" (will be made the second), "b" (will be made the last) */
