@@ -410,7 +410,7 @@ function priority(ar) {
     ar.street = street(ar);
     ar.couple = couple(ar);
     if (ar.flesh >= 1e+16) {
-        console.log("street flash");
+        text = "street flash";
         result = ar.flesh;
     }
     else if (ar.couple >= 1e+14 && ar.couple < 1e+16) {
