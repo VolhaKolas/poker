@@ -74,8 +74,8 @@ function array(value) {
 function street(arr) {
     var a = [], b = [], c = [], ar = [],
         length;
-    for (var ii = 0; ii < arr.length; ii++) {
-        ar[i] = arr[i];
+    for (var j = 0; j < arr.length; j++) {
+        ar[j] = arr[j];
     }
     length = ar.length;
     /*adding A as 1 if A, 2, 3, 4, 5 */
@@ -191,8 +191,8 @@ function flesh(arr) {
         a = [], b = [], c = [], d = [], result =[], s =[], ar =[],
         length = arr.length;
     zero = one = two = three = 0;
-    for (var ii = 0; ii < length; ii++) {
-        ar[i] = arr[i];
+    for (var j = 0; j < length; j++) {
+        ar[j] = arr[j];
     }
     for (var i = 0; i < length; i++) {
         if (ar[i] <= 14 && ar[i] >= 2) {
@@ -412,35 +412,35 @@ function priority(ar) {
     ar.street = street(ar);
     ar.couple = couple(ar);
     if (ar.flesh >= 1e+16) {
-        text = "street flash";
+        text = "Straight flush";
         result = ar.flesh;
     }
-    else if (ar.couple >= 1e+14 && ar.couple < 1e+16) {
-        text = "square";
+    else if (ar.couple >= 1e+14) {
+        text = "Four of a kind";
         result = ar.couple;
     }
-    else if (ar.couple >= 1e+12 && ar.couple < 1e+14) {
+    else if (ar.couple >= 1e+12) {
         text = "full house";
         result = ar.couple;
     }
     else if (ar.flesh >= 1e+10) {
-        text = "flesh";
+        text = "flush";
         result = ar.flesh;
     }
-    else if (ar.street >= 1e+8 && ar.street < 1e+10) {
-        text = "street";
+    else if (ar.street >= 1e+8) {
+        text = "Straight";
         result = ar.street;
     }
-    else if (ar.couple >= 1e+6 && ar.couple < 1e+8) {
-        text = "triple";
+    else if (ar.couple >= 1e+6) {
+        text = "Three of a kind";
         result = ar.couple;
     }
-    else if (ar.couple >= 1e+4 && ar.couple < 1e+6) {
-        text = "two couples";
+    else if (ar.couple >= 1e+4) {
+        text = "Two pairs";
         result = ar.couple;
     }
-    else if (ar.couple >= 1e+2 && ar.couple < 1e+4) {
-        text = "couple";
+    else if (ar.couple >= 1e+2) {
+        text = "Pair";
         result = ar.couple;
     }
 
@@ -466,11 +466,23 @@ function priority(ar) {
     return result;
 }
 
+(function () {
+    var check = document.querySelectorAll("[type='checkbox']");
 
-$("[type='checkbox']").on("click", function() {
-    $("[type='checkbox']").not(this).attr("checked", false);
-    $(this).attr("checked", true);
-});
+    if(check[0] != null) {
+        for (var j = 0; j < check.length; j++) {
+            check[j].onclick = function () {
+                for (var i = 0; i < check.length; i++) {
+                    check[i].checked = '';
+                    if (check[i] == this) {
+                        check[i].checked = 'checked';
+                        check[i].setAttribute('checked', 'checked');
+                    }
+                }
+            }
+        }
+    }
+}());
 
 $('.question [type="button"]').on('click', function () {
     if ($("[type='checkbox']").is(":checked")) {
@@ -488,7 +500,8 @@ $('.question [type="button"]').on('click', function () {
     }
 });
 
-$('.play [type="button"]').on('click', function () {
+$('.play [type="button"]').on('click', function (e) {
+    e.preventDefault();
     $(".result").css("display", "none");
     if ($(".question").css("display") == "none") {
         $(".question").css("display", "none").css("z-index", "-10");
@@ -569,12 +582,17 @@ $('.play [type="button"]').on('click', function () {
                 $(".computer p").text(sumComputer);
                 $(".player p").text(sumPlayer);
                 $("[type='checkbox']").attr("checked", false);
+
             }
         }
     }
 
     $(".result button").on("click", function() {
         $(".result").css("display", "none");
+    });
+
+    $("form").on("submit", function(e) {
+        e.preventDefault();
     });
 });
 
