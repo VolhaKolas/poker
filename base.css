@@ -24,43 +24,43 @@
     bottom: 25%;
 }
 .three {
-    left: 43%;
-    top: 15%;
-}
-.four {
-    left: 50%;
-    top: 15%;
-}
-.five {
     left: 33%;
     top: 38%;
 }
-.six {
+.four {
     left: 40%;
     top: 38%;
 }
-.seven {
+.five {
     left: 47%;
     top: 38%;
 }
-.eight {
+.six {
     left: 54%;
     top: 38%;
 }
-.nine {
+.seven {
     left: 61%;
     top: 38%;
 }
+.eight {
+    left: 43%;
+    top: 15%;
+}
+.nine {
+    left: 50%;
+    top: 15%;
+}
 .computer, .player {
     width: 7em;
-    height: 2.5em;
+    height: 1.8em;
     background: grey;
     position: absolute;
     border-radius: 5px;
     border: 4px groove black;
     text-align: center;
     line-height: 5px;
-    padding-top: 5px;
+    padding-top: 15px;
 
 }
 .computer {
@@ -71,7 +71,7 @@
     left: 56%;
     top: 80%;
 }
-.question, .result {
+.result, .question {
     position: fixed;
     margin-left: -10em;
     margin-top: -6em;
@@ -83,6 +83,10 @@
     border-radius: 15px;
     box-shadow: 2px -2px 5px;
     border: 4px groove black;
+}
+.question div {
+    margin-top: 60px;
+    margin-left: 30px;
 }
 .result {
     margin-left: 0em;
@@ -101,12 +105,15 @@
 .result div {
     padding-left: 1em;
 }
-.question [type='button'], .result button {
+.question [type='button'], .result [type='button'] {
     font-size: 1em;
     background-color: darkgreen;
     border: 2px groove black;
     border-radius: 3px;
     margin-top: 5px;
+}
+.play {
+    display: none;
 }
 .play [type='button'] {
     width: 140px;
@@ -122,4 +129,7 @@
 .memory {
     display: none;
     z-index: -1;
+}
+form div {
+    margin: auto;
 }
